@@ -1,0 +1,40 @@
+# To get started with Dependabot version updates, you'll need to specify which
+# package ecosystems to update and where the package manifests are located.
+# Please see the documentation for all configuration options:
+# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
+# .github/dependabot.yml
+
+version: 2
+updates:
+  # Updates for application dependencies (frontend/backend)
+  - package-ecosystem: "npm"
+    directory: "/" # Root directory
+    schedule:
+      interval: "weekly" # Can be: daily, weekly, monthly
+    open-pull-requests-limit: 5
+    rebase-strategy: "auto"
+    allow:
+      - dependency-type: "all" # "direct" or "indirect" or "all"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    ignore:
+      - dependency-name: "react"
+        versions: ["^19.0.0"] # Example: ignore React 19+ if you want to wait
+  # Security updates
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    allow:
+      - dependency-type: "all"
+    labels:
+      - "security"
+      - "dependabot"
+
+# Optionally, enable GitHub Actions version updates
+  - package-ecosystem: "github-actions"
+    directory: "/" 
+    schedule:
+      interval: "weekly"
